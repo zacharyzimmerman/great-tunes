@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0f0f13">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Great Tunes">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+  <title>Great Tunes</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- List view (main screen) -->
+  <div id="list-view" class="view">
+    <header class="list-header">
+      <div class="header-row">
+        <h1>Great Tunes</h1>
+        <button id="search-toggle" class="icon-btn" aria-label="Search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+      </div>
+      <div id="search-bar" class="search-bar" hidden>
+        <input type="text" id="search" placeholder="Search songs..." autocomplete="off">
+        <select id="category-filter">
+          <option value="">All Categories</option>
+          <option value="uptune">Uptunes</option>
+          <option value="ballad">Ballads</option>
+          <option value="classic">Classics</option>
+          <option value="jazz">Jazz</option>
+          <option value="novelty">Novelty</option>
+          <option value="folk">Folk</option>
+        </select>
+      </div>
+    </header>
+    <div id="song-list" class="song-list"></div>
+    <footer class="list-footer">
+      <span id="song-count"></span>
+      <span class="version-label">v0.1.0</span>
+    </footer>
+  </div>
+
+  <!-- Detail view (shown when a song is selected) -->
+  <div id="detail-view" class="view" hidden>
+    <header class="detail-header">
+      <button id="back-btn" class="back-btn" aria-label="Back to list">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        Back
+      </button>
+    </header>
+    <div class="detail-body">
+      <h2 id="song-title"></h2>
+      <div class="song-meta">
+        <span class="meta-pill" id="song-category"></span>
+        <span class="meta-text" id="song-composer"></span>
+        <span class="meta-text" id="song-year"></span>
+      </div>
+      <div id="song-tags" class="song-tags"></div>
+      <div class="notes-section" id="notes-section">
+        <h3>Why It's a Great Barbershop Tune</h3>
+        <p id="song-notes" class="notes-text"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
