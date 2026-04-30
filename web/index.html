@@ -26,15 +26,6 @@
       </div>
       <div id="search-bar" class="search-bar" hidden>
         <input type="text" id="search" placeholder="Search songs..." autocomplete="off">
-        <select id="category-filter">
-          <option value="">All Categories</option>
-          <option value="uptune">Uptunes</option>
-          <option value="ballad">Ballads</option>
-          <option value="classic">Classics</option>
-          <option value="jazz">Jazz</option>
-          <option value="novelty">Novelty</option>
-          <option value="folk">Folk</option>
-        </select>
         <select id="quartet-filter">
           <option value="">All Quartets</option>
           <option value="Air Fours">Air Fours</option>
@@ -46,6 +37,11 @@
           <option value="Saints">Saints</option>
           <option value="Sidewinders">Sidewinders</option>
           <option value="Sundowners">Sundowners</option>
+        </select>
+        <select id="sort-by">
+          <option value="year">By Year</option>
+          <option value="title">By Title</option>
+          <option value="quartet">By Quartet</option>
         </select>
       </div>
     </header>
@@ -67,14 +63,8 @@
     <div class="detail-body">
       <h2 id="song-title"></h2>
       <div class="song-meta">
-        <span class="meta-pill" id="song-category"></span>
-        <span class="meta-text" id="song-composer"></span>
+        <span class="meta-text" id="song-quartet"></span>
         <span class="meta-text" id="song-year"></span>
-      </div>
-      <div id="song-tags" class="song-tags"></div>
-      <div class="notes-section" id="notes-section">
-        <h3>Why It's a Great Barbershop Tune</h3>
-        <p id="song-notes" class="notes-text"></p>
       </div>
     </div>
   </div>

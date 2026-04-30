@@ -2,117 +2,26 @@
 
 const $ = (sel) => document.querySelector(sel);
 
-// -- Category icons (emoji shorthand) -----
-const categoryIcons = {
-  uptune: "\u{1F3B5}",
-  ballad: "\u{1F3B6}",
-  classic: "\u{2B50}",
-  jazz: "\u{1F3B7}",
-  novelty: "\u{1F389}",
-  folk: "\u{1F33F}",
+// -- Sort options -------------------------
+const sortFns = {
+  year:    (a, b) => a.year - b.year || a.title.localeCompare(b.title),
+  title:   (a, b) => a.title.localeCompare(b.title),
+  quartet: (a, b) => a.quartet.localeCompare(b.quartet) || a.year - b.year,
 };
 
 // -- Song Data ----------------------------
 const songs = [
-  {
-    id: "side-by-side",
-    title: "Side By Side",
-    quartet: "Air Fours",
-    year: 1955,
-    category: "uptune",
-    tags: ["uptune", "classic", "crowd-pleaser"],
-    notes: ""
-  },
-  {
-    id: "bye-bye-blues",
-    title: "Bye Bye Blues",
-    quartet: "GayNotes",
-    year: 1957,
-    category: "uptune",
-    tags: ["uptune", "contest", "crowd-pleaser"],
-    notes: ""
-  },
-  {
-    id: "ro-ro-rolling",
-    title: "Ro-Ro-Rolling",
-    quartet: "Lads Of Enchantment",
-    year: 1957,
-    category: "novelty",
-    tags: ["novelty", "uptune", "crowd-pleaser"],
-    notes: ""
-  },
-  {
-    id: "aint-she-sweet",
-    title: "Ain't She Sweet",
-    quartet: "Saints",
-    year: 1960,
-    category: "uptune",
-    tags: ["uptune", "classic", "standard"],
-    notes: ""
-  },
-  {
-    id: "them-there-eyes",
-    title: "Them There Eyes",
-    quartet: "Four-Do-Matics",
-    year: 1960,
-    category: "jazz",
-    tags: ["uptune", "jazz", "standard"],
-    notes: ""
-  },
-  {
-    id: "for-me-and-my-gal",
-    title: "For Me And My Gal",
-    quartet: "Sidewinders",
-    year: 1963,
-    category: "uptune",
-    tags: ["uptune", "classic", "contest"],
-    notes: ""
-  },
-  {
-    id: "back-in-those-days-gone-by",
-    title: "Back In Those Days Gone By",
-    quartet: "Golden Staters",
-    year: 1966,
-    category: "ballad",
-    tags: ["ballad", "classic", "contest"],
-    notes: ""
-  },
-  {
-    id: "sing-me-a-baby-song",
-    title: "Sing Me A Baby Song",
-    quartet: "Sundowners",
-    year: 1967,
-    category: "novelty",
-    tags: ["novelty", "uptune", "crowd-pleaser"],
-    notes: ""
-  },
-  {
-    id: "when-you-were-a-baby-and-i-was-the-kid-next-door",
-    title: "When You Were A Baby And I Was The Kid Next Door",
-    quartet: "Avant Garde",
-    year: 1968,
-    category: "ballad",
-    tags: ["ballad", "classic", "contest"],
-    notes: ""
-  },
-  {
-    id: "mary-youre-a-little-bit-old-fashioned",
-    title: "Mary You're A Little Bit Old Fashioned",
-    quartet: "Golden Staters",
-    year: 1968,
-    category: "classic",
-    tags: ["classic", "ballad", "standard"],
-    notes: ""
-  },
-  {
-    id: "them-was-the-good-old-days",
-    title: "Them Was The Good Old Days",
-    quartet: "Sundowners",
-    year: 1969,
-    category: "classic",
-    tags: ["classic", "uptune", "crowd-pleaser"],
-    notes: ""
-  },
+  { id: "side-by-side", title: "Side By Side", quartet: "Air Fours", year: 1955 },
+  { id: "bye-bye-blues", title: "Bye Bye Blues", quartet: "GayNotes", year: 1957 },
+  { id: "ro-ro-rolling", title: "Ro-Ro-Rolling", quartet: "Lads Of Enchantment", year: 1957 },
+  { id: "aint-she-sweet", title: "Ain't She Sweet", quartet: "Saints", year: 1960 },
+  { id: "them-there-eyes", title: "Them There Eyes", quartet: "Four-Do-Matics", year: 1960 },
+  { id: "for-me-and-my-gal", title: "For Me And My Gal", quartet: "Sidewinders", year: 1963 },
+  { id: "back-in-those-days-gone-by", title: "Back In Those Days Gone By", quartet: "Golden Staters", year: 1966 },
+  { id: "sing-me-a-baby-song", title: "Sing Me A Baby Song", quartet: "Sundowners", year: 1967 },
+  { id: "when-you-were-a-baby-and-i-was-the-kid-next-door", title: "When You Were A Baby And I Was The Kid Next Door", quartet: "Avant Garde", year: 1968 },
+  { id: "mary-youre-a-little-bit-old-fashioned", title: "Mary You're A Little Bit Old Fashioned", quartet: "Golden Staters", year: 1968 },
+  { id: "them-was-the-good-old-days", title: "Them Was The Good Old Days", quartet: "Sundowners", year: 1969 },
 ];
 
 let activeSongId = null;
@@ -120,25 +29,21 @@ let activeSongId = null;
 // -- Rendering ----------------------------
 function getFilteredSongs() {
   const query = $("#search").value.toLowerCase().trim();
-  const categoryFilter = $("#category-filter").value;
   const quartetFilter = $("#quartet-filter").value;
+  const sortKey = $("#sort-by").value;
 
-  return songs.filter((s) => {
-    if (categoryFilter && s.category !== categoryFilter) return false;
+  const filtered = songs.filter((s) => {
     if (quartetFilter && s.quartet !== quartetFilter) return false;
     if (query) {
-      const haystack = [
-        s.title,
-        s.quartet,
-        s.category,
-        ...s.tags,
-      ]
+      const haystack = [s.title, s.quartet, String(s.year)]
         .join(" ")
         .toLowerCase();
       return haystack.includes(query);
     }
     return true;
   });
+
+  return filtered.sort(sortFns[sortKey] || sortFns.year);
 }
 
 function renderSongList(filtered) {
@@ -150,41 +55,27 @@ function renderSongList(filtered) {
     row.className = "song-row";
     row.dataset.id = song.id;
 
-    // Icon
-    const icon = document.createElement("div");
-    icon.className = "song-icon";
-    icon.textContent = categoryIcons[song.category] || categoryIcons.classic;
-    row.appendChild(icon);
+    // Year badge
+    const year = document.createElement("div");
+    year.className = "song-year-badge";
+    year.textContent = song.year;
+    row.appendChild(year);
 
     // Info
     const info = document.createElement("div");
     info.className = "song-info";
 
-    const titleRow = document.createElement("div");
-    titleRow.className = "song-title-row";
-
     const title = document.createElement("span");
     title.className = "song-title";
     title.textContent = song.title;
-    titleRow.appendChild(title);
-
-    info.appendChild(titleRow);
+    info.appendChild(title);
 
     const sub = document.createElement("span");
     sub.className = "song-sub";
-    const parts = [song.quartet];
-    if (song.year) parts.push(song.year);
-    sub.textContent = parts.join(" \u00B7 ");
+    sub.textContent = song.quartet;
     info.appendChild(sub);
 
     row.appendChild(info);
-
-    // Category pill
-    const pill = document.createElement("span");
-    pill.className = "song-category-pill";
-    pill.dataset.category = song.category;
-    pill.textContent = song.category;
-    row.appendChild(pill);
 
     row.addEventListener("click", () => selectSong(song.id));
     container.appendChild(row);
@@ -221,33 +112,8 @@ function selectSong(id, { pushHistory = true } = {}) {
 
   // Populate detail view
   $("#song-title").textContent = song.title;
-  $("#song-category").textContent = song.category;
-
-  const composerEl = $("#song-composer");
-  composerEl.textContent = song.quartet;
-
-  const yearEl = $("#song-year");
-  yearEl.textContent = song.year ? String(song.year) : "";
-
-  // Tags
-  const tagsContainer = $("#song-tags");
-  tagsContainer.innerHTML = "";
-  for (const tag of song.tags) {
-    const pill = document.createElement("span");
-    pill.className = "tag-pill";
-    pill.textContent = tag;
-    tagsContainer.appendChild(pill);
-  }
-
-  // Notes
-  const notesSection = $("#notes-section");
-  const notesEl = $("#song-notes");
-  if (song.notes) {
-    notesEl.textContent = song.notes;
-    notesSection.hidden = false;
-  } else {
-    notesSection.hidden = true;
-  }
+  $("#song-quartet").textContent = song.quartet;
+  $("#song-year").textContent = song.year ? String(song.year) : "";
 
   showDetailView();
 }
@@ -277,12 +143,11 @@ if ("serviceWorker" in navigator) {
 
 // -- Init ---------------------------------
 function init() {
-  songs.sort((a, b) => a.title.localeCompare(b.title));
   refreshList();
 
   $("#search").addEventListener("input", refreshList);
-  $("#category-filter").addEventListener("change", refreshList);
   $("#quartet-filter").addEventListener("change", refreshList);
+  $("#sort-by").addEventListener("change", refreshList);
   $("#back-btn").addEventListener("click", () => history.back());
 
   // Search toggle

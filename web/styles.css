@@ -110,7 +110,7 @@ body {
 
 #search::placeholder { color: var(--text-muted); }
 
-#category-filter {
+#quartet-filter, #sort-by {
   padding: 8px 10px;
   background: var(--bg);
   border: 1px solid var(--border);
@@ -143,17 +143,14 @@ body {
 .song-row:hover { background: var(--bg-hover); }
 .song-row:active { background: var(--bg-active); }
 
-.song-icon {
-  width: 40px;
-  height: 40px;
+.song-year-badge {
   flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  font-size: 1.1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  width: 36px;
+  text-align: center;
 }
 
 .song-info {
@@ -162,13 +159,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2px;
-}
-
-.song-title-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-width: 0;
 }
 
 .song-title {
@@ -187,48 +177,6 @@ body {
   text-overflow: ellipsis;
 }
 
-.song-category-pill {
-  font-size: 0.7rem;
-  padding: 3px 10px;
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  color: var(--text-muted);
-  flex-shrink: 0;
-  font-weight: 500;
-  text-transform: capitalize;
-}
-
-/* Category-specific pill colors */
-.song-category-pill[data-category="uptune"] {
-  background: rgba(72, 199, 142, 0.12);
-  border-color: rgba(72, 199, 142, 0.3);
-  color: #48c78e;
-}
-
-.song-category-pill[data-category="ballad"] {
-  background: rgba(124, 111, 255, 0.12);
-  border-color: rgba(124, 111, 255, 0.3);
-  color: #7c6fff;
-}
-
-.song-category-pill[data-category="jazz"] {
-  background: rgba(255, 183, 77, 0.12);
-  border-color: rgba(255, 183, 77, 0.3);
-  color: #ffb74d;
-}
-
-.song-category-pill[data-category="novelty"] {
-  background: rgba(255, 112, 163, 0.12);
-  border-color: rgba(255, 112, 163, 0.3);
-  color: #ff70a3;
-}
-
-.song-category-pill[data-category="folk"] {
-  background: rgba(139, 195, 74, 0.12);
-  border-color: rgba(139, 195, 74, 0.3);
-  color: #8bc34a;
-}
 
 /* -- List Footer -------------------------- */
 .list-footer {
@@ -301,38 +249,8 @@ body {
   margin-bottom: 16px;
 }
 
-.meta-pill {
-  display: inline-block;
-  padding: 4px 14px;
-  border-radius: 14px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  background: var(--accent-dim);
-  color: white;
-  text-transform: capitalize;
-}
-
 .meta-text {
   font-size: 0.85rem;
-  color: var(--text-muted);
-}
-
-/* -- Tag Pills (detail view) -------------- */
-.song-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 24px;
-}
-
-.tag-pill {
-  font-size: 0.72rem;
-  padding: 3px 10px;
-  border-radius: 12px;
-  font-weight: 500;
-  text-transform: lowercase;
-  background: rgba(124, 111, 255, 0.1);
-  border: 1px solid rgba(124, 111, 255, 0.25);
   color: var(--text-muted);
 }
 
@@ -381,7 +299,7 @@ body {
     font-size: 1rem;
   }
 
-  #category-filter {
+  #quartet-filter, #sort-by {
     flex: 1 1 0;
     min-width: 0;
     padding: 12px 10px;
