@@ -1,3 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <text x="16" y="26" font-family="sans-serif" font-weight="bold" font-size="30" fill="#4A90E2" text-anchor="middle">G</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect width="200" height="200" rx="40" fill="#1a1a24"/>
+  <text x="72" y="134" font-family="'Segoe UI', system-ui, sans-serif" font-weight="400" font-size="100" fill="#e8e6f0" text-anchor="middle">G</text>
+  <text x="138" y="134" font-family="'Segoe UI', system-ui, sans-serif" font-weight="700" font-size="100" fill="#4A90E2" text-anchor="middle">T</text>
 </svg>

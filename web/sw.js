@@ -1,4 +1,4 @@
-const CACHE_VERSION = "v0.2.1";
+const CACHE_VERSION = "v0.2.3";
 const CACHE_NAME = "great-tunes-" + CACHE_VERSION;
 const ASSETS = [
   "./",
@@ -7,6 +7,9 @@ const ASSETS = [
   "./styles.css",
   "./manifest.json",
   "./favicon.svg",
+  "./icons/icon-192.png",
+  "./icons/icon-512.png",
+  "./icons/apple-touch-icon.png",
 ];
 
 self.addEventListener("install", (e) => {
