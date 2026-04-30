@@ -12,7 +12,8 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
   <title>Great Tunes</title>
-  <link rel="stylesheet" href="styles.css?v=0.2.2">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zacharyzimmerman/great-apps@main/framework.css">
+  <link rel="stylesheet" href="styles.css?v=0.3.0">
 </head>
 <body>
   <!-- List view (main screen) -->
@@ -45,10 +46,10 @@
         </select>
       </div>
     </header>
-    <div id="song-list" class="song-list"></div>
+    <div id="song-list" class="item-list"></div>
     <footer class="list-footer">
       <span id="song-count"></span>
-      <span class="version-label">v0.2.3</span>
+      <span class="version-label">v0.3.0</span>
     </footer>
   </div>
 
@@ -62,13 +63,17 @@
     </header>
     <div class="detail-body">
       <h2 id="song-title"></h2>
-      <div class="song-meta">
+      <div class="detail-meta">
         <span class="meta-text" id="song-quartet"></span>
         <span class="meta-text" id="song-year"></span>
+      </div>
+      <div id="audio-section" class="audio-section" hidden>
+        <audio id="audio-player" controls preload="metadata"></audio>
       </div>
     </div>
   </div>
 
-  <script src="app.js?v=0.2.3"></script>
+  <script src="https://cdn.jsdelivr.net/gh/zacharyzimmerman/great-apps@main/framework.js"></script>
+  <script src="app.js?v=0.3.0"></script>
 </body>
 </html>

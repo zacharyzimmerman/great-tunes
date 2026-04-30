@@ -1,4 +1,4 @@
-const CACHE_VERSION = "v0.2.3";
+const CACHE_VERSION = "v0.3.0";
 const CACHE_NAME = "great-tunes-" + CACHE_VERSION;
 const ASSETS = [
   "./",
