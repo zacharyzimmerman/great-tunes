@@ -1,6 +1,6 @@
 // Great Tunes — Curated Barbershop Song Browser
 
-const $ = (sel) => document.querySelector(sel);
+const $ = GreatApp.$;
 
 // -- Sort options -------------------------
 const sortFns = {
@@ -11,17 +11,17 @@ const sortFns = {
 
 // -- Song Data ----------------------------
 const songs = [
-  { id: "side-by-side", title: "Side By Side", quartet: "Air Fours", year: 1955 },
-  { id: "bye-bye-blues", title: "Bye Bye Blues", quartet: "GayNotes", year: 1957 },
-  { id: "ro-ro-rolling", title: "Ro-Ro-Rolling", quartet: "Lads Of Enchantment", year: 1957 },
-  { id: "aint-she-sweet", title: "Ain't She Sweet", quartet: "Saints", year: 1960 },
-  { id: "them-there-eyes", title: "Them There Eyes", quartet: "Four-Do-Matics", year: 1960 },
-  { id: "for-me-and-my-gal", title: "For Me And My Gal", quartet: "Sidewinders", year: 1963 },
-  { id: "back-in-those-days-gone-by", title: "Back In Those Days Gone By", quartet: "Golden Staters", year: 1966 },
-  { id: "sing-me-a-baby-song", title: "Sing Me A Baby Song", quartet: "Sundowners", year: 1967 },
-  { id: "when-you-were-a-baby-and-i-was-the-kid-next-door", title: "When You Were A Baby And I Was The Kid Next Door", quartet: "Avant Garde", year: 1968 },
-  { id: "mary-youre-a-little-bit-old-fashioned", title: "Mary You're A Little Bit Old Fashioned", quartet: "Golden Staters", year: 1968 },
-  { id: "them-was-the-good-old-days", title: "Them Was The Good Old Days", quartet: "Sundowners", year: 1969 },
+  { id: "side-by-side", title: "Side By Side", quartet: "Air Fours", year: 1955, audioUrl: null },
+  { id: "bye-bye-blues", title: "Bye Bye Blues", quartet: "GayNotes", year: 1957, audioUrl: null },
+  { id: "ro-ro-rolling", title: "Ro-Ro-Rolling", quartet: "Lads Of Enchantment", year: 1957, audioUrl: null },
+  { id: "aint-she-sweet", title: "Ain't She Sweet", quartet: "Saints", year: 1960, audioUrl: null },
+  { id: "them-there-eyes", title: "Them There Eyes", quartet: "Four-Do-Matics", year: 1960, audioUrl: null },
+  { id: "for-me-and-my-gal", title: "For Me And My Gal", quartet: "Sidewinders", year: 1963, audioUrl: null },
+  { id: "back-in-those-days-gone-by", title: "Back In Those Days Gone By", quartet: "Golden Staters", year: 1966, audioUrl: null },
+  { id: "sing-me-a-baby-song", title: "Sing Me A Baby Song", quartet: "Sundowners", year: 1967, audioUrl: null },
+  { id: "when-you-were-a-baby-and-i-was-the-kid-next-door", title: "When You Were A Baby And I Was The Kid Next Door", quartet: "Avant Garde", year: 1968, audioUrl: null },
+  { id: "mary-youre-a-little-bit-old-fashioned", title: "Mary You're A Little Bit Old Fashioned", quartet: "Golden Staters", year: 1968, audioUrl: null },
+  { id: "them-was-the-good-old-days", title: "Them Was The Good Old Days", quartet: "Sundowners", year: 1969, audioUrl: null },
 ];
 
 let activeSongId = null;
@@ -52,30 +52,35 @@ function renderSongList(filtered) {
 
   for (const song of filtered) {
     const row = document.createElement("div");
-    row.className = "song-row";
+    row.className = "item-row";
     row.dataset.id = song.id;
 
     // Year badge
     const year = document.createElement("div");
-    year.className = "song-year-badge";
+    year.className = "year-badge";
     year.textContent = song.year;
     row.appendChild(year);
 
     // Info
     const info = document.createElement("div");
-    info.className = "song-info";
+    info.className = "item-info";
 
     const title = document.createElement("span");
-    title.className = "song-title";
+    title.className = "item-title";
     title.textContent = song.title;
     info.appendChild(title);
 
     const sub = document.createElement("span");
-    sub.className = "song-sub";
+    sub.className = "item-sub";
     sub.textContent = song.quartet;
     info.appendChild(sub);
 
     row.appendChild(info);
+
+    // Play button (from framework)
+    if (song.audioUrl) {
+      row.appendChild(GreatApp.createPlayButton(song.id, song.audioUrl));
+    }
 
     row.addEventListener("click", () => selectSong(song.id));
     container.appendChild(row);
@@ -89,18 +94,6 @@ function refreshList() {
 }
 
 // -- Navigation ---------------------------
-function showDetailView() {
-  $("#list-view").hidden = true;
-  $("#detail-view").hidden = false;
-}
-
-function showListView() {
-  activeSongId = null;
-  $("#detail-view").hidden = true;
-  $("#list-view").hidden = false;
-  refreshList();
-}
-
 function selectSong(id, { pushHistory = true } = {}) {
   activeSongId = id;
   const song = songs.find((s) => s.id === id);
@@ -115,29 +108,35 @@ function selectSong(id, { pushHistory = true } = {}) {
   $("#song-quartet").textContent = song.quartet;
   $("#song-year").textContent = song.year ? String(song.year) : "";
 
-  showDetailView();
+  // Audio player
+  const audioSection = $("#audio-section");
+  const audioPlayer = $("#audio-player");
+  if (song.audioUrl) {
+    audioPlayer.src = song.audioUrl;
+    audioSection.hidden = false;
+  } else {
+    audioPlayer.removeAttribute("src");
+    audioPlayer.load();
+    audioSection.hidden = true;
+  }
+
+  GreatApp.showView("#detail-view");
 }
 
-// -- Keyboard Navigation ------------------
-document.addEventListener("keydown", (e) => {
-  if ((e.ctrlKey && e.key === "k") || (e.key === "/" && document.activeElement !== $("#search"))) {
-    e.preventDefault();
-    const searchBar = $("#search-bar");
-    if (searchBar.hidden) searchBar.hidden = false;
-    $("#search").focus();
-    $("#search").select();
-    return;
+function showListView() {
+  // Pause detail audio player when leaving detail view
+  const audioPlayer = $("#audio-player");
+  if (audioPlayer && !audioPlayer.paused) {
+    audioPlayer.pause();
   }
 
-  if (e.key === "Escape" && !$("#detail-view").hidden) {
-    history.back();
-  }
-});
+  activeSongId = null;
+  GreatApp.showView("#list-view");
+  refreshList();
+}
 
 // -- Service Worker -----------------------
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("sw.js");
-}
+GreatApp.registerSW("sw.js");
 
 // -- Init ---------------------------------
 function init() {
@@ -148,14 +147,11 @@ function init() {
   $("#sort-by").addEventListener("change", refreshList);
   $("#back-btn").addEventListener("click", () => history.back());
 
-  // Search toggle
-  $("#search-toggle").addEventListener("click", () => {
-    const bar = $("#search-bar");
-    bar.hidden = !bar.hidden;
-    if (!bar.hidden) {
-      $("#search").focus();
-    }
-  });
+  // Search toggle (framework helper)
+  GreatApp.initSearchToggle("#search-toggle", "#search-bar", "#search");
+
+  // Keyboard shortcuts (framework helper)
+  GreatApp.initKeyboard({ searchSel: "#search", detailViewSel: "#detail-view" });
 
   // Browser back/forward
   window.addEventListener("popstate", (e) => {
