@@ -1,4 +1,4 @@
-const CACHE_NAME = "tunes-v0.1.0";
+const CACHE_NAME = 'tunes-v0.1.0';
 const PRE_CACHE = [
   "./",
   "./styles.css",
