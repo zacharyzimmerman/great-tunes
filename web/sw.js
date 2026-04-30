@@ -1,9 +1,40 @@
-// Self-destructing service worker: unregisters itself and clears all caches.
-// Deployed to clean up old cached versions on existing installs.
-self.addEventListener("install", () => self.skipWaiting());
+const CACHE_VERSION = "v0.2.1";
+const CACHE_NAME = "great-tunes-" + CACHE_VERSION;
+const ASSETS = [
+  "./",
+  "./index.html",
+  "./app.js",
+  "./styles.css",
+  "./manifest.json",
+  "./favicon.svg",
+];
+
+self.addEventListener("install", (e) => {
+  e.waitUntil(
+    caches.open(CACHE_NAME)
+      .then((cache) => cache.addAll(ASSETS))
+      .then(() => self.skipWaiting())
+  );
+});
+
 self.addEventListener("activate", (e) => {
   e.waitUntil(
-    caches.keys().then((keys) => Promise.all(keys.map((k) => caches.delete(k))))
-      .then(() => self.registration.unregister())
+    caches.keys()
+      .then((keys) => Promise.all(
+        keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k))
+      ))
+      .then(() => self.clients.claim())
+  );
+});
+
+self.addEventListener("fetch", (e) => {
+  e.respondWith(
+    fetch(e.request)
+      .then((response) => {
+        const clone = response.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(e.request, clone));
+        return response;
+      })
+      .catch(() => caches.match(e.request))
   );
 });
