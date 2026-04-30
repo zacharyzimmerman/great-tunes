@@ -491,9 +491,11 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-// -- Service Worker Registration ----------
+// -- Unregister old service workers -------
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("sw.js").catch(() => {});
+  navigator.serviceWorker.getRegistrations().then((regs) => {
+    for (const r of regs) r.unregister();
+  });
 }
 
 // -- Init ---------------------------------
