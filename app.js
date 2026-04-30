@@ -81,7 +81,7 @@ function renderSongList(filtered) {
     container.appendChild(row);
   }
 
-  $("#song-count").textContent = `${filtered.length} song${filtered.length !== 1 ? "s" : ""}`;
+  $("#song-count").textContent = `${filtered.length} tune${filtered.length !== 1 ? "s" : ""}`;
 }
 
 function refreshList() {
