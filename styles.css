@@ -59,14 +59,12 @@ body {
 
 .header-row h1 {
   font-size: 1.25rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  font-weight: 400;
 }
 
 .header-accent {
   color: #4A90E2;
+  font-weight: 700;
 }
 
 .icon-btn {
