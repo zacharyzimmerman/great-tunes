@@ -6,6 +6,7 @@
   margin-right: 0;
   font-size: 0.7em;
   font-weight: 600;
+  vertical-align: middle;
   color: rgba(124, 111, 255, 0.85);
 }
 .rank-gold   { color: #d4a017; }
