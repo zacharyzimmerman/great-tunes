@@ -1,0 +1,8 @@
+{
+  "name": "great-tunes",
+  "version": "0.3.7",
+  "private": true,
+  "scripts": {
+    "bump": "node scripts/bump-version.js"
+  }
+}
