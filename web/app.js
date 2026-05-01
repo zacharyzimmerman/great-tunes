@@ -171,8 +171,12 @@ function showListView() {
 GreatApp.registerSW("sw.js");
 
 // -- Auto-play next tune ------------------
+let lastListPlayingId = null;
+GreatApp.listAudio.addEventListener("play", () => {
+  lastListPlayingId = GreatApp.listPlayingId;
+});
 GreatApp.listAudio.addEventListener("ended", () => {
-  const currentId = GreatApp.listPlayingId;
+  const currentId = lastListPlayingId;
   if (!currentId) return;
   const list = getFilteredSongs();
   const idx = list.findIndex((s) => s.id === currentId);
