@@ -16,6 +16,13 @@ function ordinal(n) {
   return n + (s[(v - 20) % 10] || s[v] || s[0]);
 }
 
+function rankClass(n) {
+  if (n === 1) return "rank-gold";
+  if (n === 2) return "rank-silver";
+  if (n <= 5) return "rank-bronze";
+  return "";
+}
+
 // -- Song Data ----------------------------
 const songs = [
   { id: "side-by-side", title: "Side By Side", quartet: "Air Fours", year: 1955, rank: 4, audioUrl: "audio/side-by-side.mp3" },
@@ -84,11 +91,11 @@ function renderSongList(filtered) {
 
     row.appendChild(info);
 
-    // Rank pill
-    const rankPill = document.createElement("span");
-    rankPill.className = "pill-tag";
-    rankPill.textContent = ordinal(song.rank);
-    row.appendChild(rankPill);
+    // Rank badge
+    const badge = document.createElement("span");
+    badge.className = "rank-badge " + rankClass(song.rank);
+    badge.textContent = ordinal(song.rank);
+    row.appendChild(badge);
 
     // Play button (from framework)
     if (song.audioUrl) {
@@ -120,7 +127,9 @@ function selectSong(id, { pushHistory = true } = {}) {
   $("#song-title").textContent = song.title;
   $("#song-quartet").textContent = song.quartet;
   $("#song-year").textContent = song.year ? String(song.year) : "";
-  $("#song-rank").textContent = ordinal(song.rank) + " place";
+  const rankEl = $("#song-rank");
+  rankEl.textContent = ordinal(song.rank) + " place";
+  rankEl.className = "pill-accent " + rankClass(song.rank);
 
   // Audio player
   const audioSection = $("#audio-section");
