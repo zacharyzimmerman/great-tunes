@@ -1,9 +1,9 @@
 /* Great Tunes — App-specific style overrides
    Base styles provided by great-apps/framework.css via CDN */
 
-/* Rank text — colored inline text after quartet name */
+/* Rank text — colored inline text before quartet name */
 .rank-text {
-  margin-left: 6px;
+  margin-right: 6px;
   font-size: 0.7em;
   font-weight: 600;
   color: rgba(124, 111, 255, 0.85);
