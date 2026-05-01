@@ -87,10 +87,10 @@ function renderSongList(filtered) {
     const sub = document.createElement("span");
     sub.className = "item-sub";
     sub.textContent = song.quartet;
-    const badge = document.createElement("span");
-    badge.className = "rank-badge " + rankClass(song.rank);
-    badge.textContent = ordinal(song.rank);
-    sub.appendChild(badge);
+    const rank = document.createElement("span");
+    rank.className = "rank-text " + rankClass(song.rank);
+    rank.textContent = ordinal(song.rank);
+    sub.appendChild(rank);
     info.appendChild(sub);
 
     row.appendChild(info);

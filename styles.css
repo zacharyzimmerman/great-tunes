@@ -1,54 +1,17 @@
 /* Great Tunes — App-specific style overrides
    Base styles provided by great-apps/framework.css via CDN */
 
-/* Rank badges — tiny inline circles next to quartet name */
-.rank-badge {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.45rem;
+/* Rank text — colored inline text after quartet name */
+.rank-text {
+  margin-left: 6px;
   font-weight: 600;
-  flex-shrink: 0;
-  line-height: 1;
-  letter-spacing: 0.02em;
-  background: rgba(124, 111, 255, 0.15);
-  border: 1px solid rgba(124, 111, 255, 0.3);
   color: rgba(124, 111, 255, 0.85);
-  vertical-align: middle;
-  margin-left: 5px;
 }
-.rank-gold {
-  background: rgba(184, 134, 11, 0.15);
-  border-color: rgba(184, 134, 11, 0.4);
-  color: #d4a017;
-}
-.rank-silver {
-  background: rgba(160, 160, 160, 0.12);
-  border-color: rgba(160, 160, 160, 0.35);
-  color: #a8a8a8;
-}
-.rank-bronze {
-  background: rgba(176, 120, 72, 0.15);
-  border-color: rgba(176, 120, 72, 0.35);
-  color: #c4915c;
-}
+.rank-gold   { color: #d4a017; }
+.rank-silver { color: #a8a8a8; }
+.rank-bronze { color: #c4915c; }
 
 /* Detail view rank pill colors */
-.pill-accent.rank-gold {
-  background: rgba(184, 134, 11, 0.2);
-  border: 1px solid rgba(184, 134, 11, 0.4);
-  color: #d4a017;
-}
-.pill-accent.rank-silver {
-  background: rgba(160, 160, 160, 0.15);
-  border: 1px solid rgba(160, 160, 160, 0.35);
-  color: #a8a8a8;
-}
-.pill-accent.rank-bronze {
-  background: rgba(176, 120, 72, 0.2);
-  border: 1px solid rgba(176, 120, 72, 0.35);
-  color: #c4915c;
-}
+.pill-accent.rank-gold   { background: rgba(184, 134, 11, 0.2); border: 1px solid rgba(184, 134, 11, 0.4); color: #d4a017; }
+.pill-accent.rank-silver { background: rgba(160, 160, 160, 0.15); border: 1px solid rgba(160, 160, 160, 0.35); color: #a8a8a8; }
+.pill-accent.rank-bronze { background: rgba(176, 120, 72, 0.2); border: 1px solid rgba(176, 120, 72, 0.35); color: #c4915c; }
