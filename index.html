@@ -43,13 +43,14 @@
           <option value="year">By Year</option>
           <option value="title">By Title</option>
           <option value="quartet">By Quartet</option>
+          <option value="rank">By Rank</option>
         </select>
       </div>
     </header>
     <div id="song-list" class="item-list"></div>
     <footer class="list-footer">
       <span id="song-count"></span>
-      <span class="version-label">v0.3.1</span>
+      <span class="version-label">v0.3.2</span>
     </footer>
   </div>
 
@@ -66,6 +67,7 @@
       <div class="detail-meta">
         <span class="meta-text" id="song-quartet"></span>
         <span class="meta-text" id="song-year"></span>
+        <span class="pill-accent" id="song-rank"></span>
       </div>
       <div id="audio-section" class="audio-section" hidden>
         <audio id="audio-player" controls preload="metadata"></audio>
