@@ -87,15 +87,13 @@ function renderSongList(filtered) {
     const sub = document.createElement("span");
     sub.className = "item-sub";
     sub.textContent = song.quartet;
-    info.appendChild(sub);
-
-    row.appendChild(info);
-
-    // Rank badge
     const badge = document.createElement("span");
     badge.className = "rank-badge " + rankClass(song.rank);
     badge.textContent = ordinal(song.rank);
-    row.appendChild(badge);
+    sub.appendChild(badge);
+    info.appendChild(sub);
+
+    row.appendChild(info);
 
     // Play button (from framework)
     if (song.audioUrl) {
