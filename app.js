@@ -90,7 +90,7 @@ function renderSongList(filtered) {
     rank.className = "rank-text " + rankClass(song.rank);
     rank.textContent = ordinal(song.rank);
     sub.appendChild(rank);
-    sub.appendChild(document.createTextNode(" " + song.quartet));
+    sub.appendChild(document.createTextNode(" · " + song.quartet));
     info.appendChild(sub);
 
     row.appendChild(info);
