@@ -114,7 +114,7 @@ function refreshList() {
 }
 
 // -- Navigation ---------------------------
-function selectSong(id, { pushHistory = true } = {}) {
+function selectSong(id, { pushHistory = true, autoPlay = false } = {}) {
   activeSongId = id;
   const song = songs.find((s) => s.id === id);
   if (!song) return;
@@ -137,11 +137,20 @@ function selectSong(id, { pushHistory = true } = {}) {
   if (song.audioUrl) {
     audioPlayer.src = song.audioUrl;
     audioSection.hidden = false;
+    if (autoPlay) audioPlayer.play();
   } else {
     audioPlayer.removeAttribute("src");
     audioPlayer.load();
     audioSection.hidden = true;
   }
+
+  // Auto-play next from detail view
+  audioPlayer.onended = () => {
+    const list = getFilteredSongs();
+    const idx = list.findIndex((s) => s.id === id);
+    const next = list[idx + 1];
+    if (next) selectSong(next.id, { autoPlay: true });
+  };
 
   GreatApp.showView("#detail-view");
 }
@@ -160,6 +169,18 @@ function showListView() {
 
 // -- Service Worker -----------------------
 GreatApp.registerSW("sw.js");
+
+// -- Auto-play next tune ------------------
+GreatApp.listAudio.addEventListener("ended", () => {
+  const currentId = GreatApp.listPlayingId;
+  if (!currentId) return;
+  const list = getFilteredSongs();
+  const idx = list.findIndex((s) => s.id === currentId);
+  const next = list[idx + 1];
+  if (next && next.audioUrl) {
+    GreatApp.togglePlay(next.id, next.audioUrl);
+  }
+});
 
 // -- Init ---------------------------------
 function init() {
