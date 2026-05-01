@@ -1,12 +1,16 @@
 /* Great Tunes — App-specific style overrides
    Base styles provided by great-apps/framework.css via CDN */
 
+/* Subtitle row — flex to vertically center mixed font sizes */
+.item-sub {
+  display: flex;
+  align-items: center;
+}
+
 /* Rank text — colored inline text before quartet name */
 .rank-text {
-  margin-right: 0;
   font-size: 0.7em;
   font-weight: 600;
-  vertical-align: middle;
   color: rgba(124, 111, 255, 0.85);
 }
 .rank-gold   { color: #d4a017; }
