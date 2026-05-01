@@ -11,6 +11,7 @@
 .rank-text {
   font-size: 0.7em;
   font-weight: 600;
+  margin-right: 2px;
   color: rgba(124, 111, 255, 0.85);
 }
 .rank-gold   { color: #d4a017; }
