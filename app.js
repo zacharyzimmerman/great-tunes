@@ -86,11 +86,11 @@ function renderSongList(filtered) {
 
     const sub = document.createElement("span");
     sub.className = "item-sub";
-    sub.textContent = song.quartet;
     const rank = document.createElement("span");
     rank.className = "rank-text " + rankClass(song.rank);
     rank.textContent = ordinal(song.rank);
     sub.appendChild(rank);
+    sub.appendChild(document.createTextNode(" " + song.quartet));
     info.appendChild(sub);
 
     row.appendChild(info);
