@@ -3,7 +3,7 @@
 
 /* Rank text — colored inline text before quartet name */
 .rank-text {
-  margin-right: 6px;
+  margin-right: 0;
   font-size: 0.7em;
   font-weight: 600;
   color: rgba(124, 111, 255, 0.85);
