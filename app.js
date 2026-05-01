@@ -1,4 +1,4 @@
-// Great Tunes — Curated Barbershop Song Browser
+// Great Tunes â€” Curated Barbershop Song Browser
 
 const $ = GreatApp.$;
 
@@ -11,17 +11,17 @@ const sortFns = {
 
 // -- Song Data ----------------------------
 const songs = [
-  { id: "side-by-side", title: "Side By Side", quartet: "Air Fours", year: 1955, audioUrl: null },
-  { id: "bye-bye-blues", title: "Bye Bye Blues", quartet: "GayNotes", year: 1957, audioUrl: null },
-  { id: "ro-ro-rolling", title: "Ro-Ro-Rolling", quartet: "Lads Of Enchantment", year: 1957, audioUrl: null },
-  { id: "aint-she-sweet", title: "Ain't She Sweet", quartet: "Saints", year: 1960, audioUrl: null },
-  { id: "them-there-eyes", title: "Them There Eyes", quartet: "Four-Do-Matics", year: 1960, audioUrl: null },
-  { id: "for-me-and-my-gal", title: "For Me And My Gal", quartet: "Sidewinders", year: 1963, audioUrl: null },
-  { id: "back-in-those-days-gone-by", title: "Back In Those Days Gone By", quartet: "Golden Staters", year: 1966, audioUrl: null },
-  { id: "sing-me-a-baby-song", title: "Sing Me A Baby Song", quartet: "Sundowners", year: 1967, audioUrl: null },
-  { id: "when-you-were-a-baby-and-i-was-the-kid-next-door", title: "When You Were A Baby And I Was The Kid Next Door", quartet: "Avant Garde", year: 1968, audioUrl: null },
-  { id: "mary-youre-a-little-bit-old-fashioned", title: "Mary You're A Little Bit Old Fashioned", quartet: "Golden Staters", year: 1968, audioUrl: null },
-  { id: "them-was-the-good-old-days", title: "Them Was The Good Old Days", quartet: "Sundowners", year: 1969, audioUrl: null },
+  { id: "side-by-side", title: "Side By Side", quartet: "Air Fours", year: 1955, audioUrl: "audio/side-by-side.mp3" },
+  { id: "bye-bye-blues", title: "Bye Bye Blues", quartet: "GayNotes", year: 1957, audioUrl: "audio/bye-bye-blues.mp3" },
+  { id: "ro-ro-rolling", title: "Ro-Ro-Rolling", quartet: "Lads Of Enchantment", year: 1957, audioUrl: "audio/ro-ro-rolling.mp3" },
+  { id: "aint-she-sweet", title: "Ain't She Sweet", quartet: "Saints", year: 1960, audioUrl: "audio/aint-she-sweet.mp3" },
+  { id: "them-there-eyes", title: "Them There Eyes", quartet: "Four-Do-Matics", year: 1960, audioUrl: "audio/them-there-eyes.mp3" },
+  { id: "for-me-and-my-gal", title: "For Me And My Gal", quartet: "Sidewinders", year: 1963, audioUrl: "audio/for-me-and-my-gal.mp3" },
+  { id: "back-in-those-days-gone-by", title: "Back In Those Days Gone By", quartet: "Golden Staters", year: 1966, audioUrl: "audio/back-in-those-days-gone-by.mp3" },
+  { id: "sing-me-a-baby-song", title: "Sing Me A Baby Song", quartet: "Sundowners", year: 1967, audioUrl: "audio/sing-me-a-baby-song.mp3" },
+  { id: "when-you-were-a-baby-and-i-was-the-kid-next-door", title: "When You Were A Baby And I Was The Kid Next Door", quartet: "Avant Garde", year: 1968, audioUrl: "audio/when-you-were-a-baby-and-i-was-the-kid-next-door.mp3" },
+  { id: "mary-youre-a-little-bit-old-fashioned", title: "Mary You're A Little Bit Old Fashioned", quartet: "Golden Staters", year: 1968, audioUrl: "audio/mary-youre-a-little-bit-old-fashioned.mp3" },
+  { id: "them-was-the-good-old-days", title: "Them Was The Good Old Days", quartet: "Sundowners", year: 1969, audioUrl: "audio/them-was-the-good-old-days.mp3" },
 ];
 
 let activeSongId = null;
