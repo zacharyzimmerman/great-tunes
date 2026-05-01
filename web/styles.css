@@ -1,2 +1,24 @@
 /* Great Tunes — App-specific style overrides
    Base styles provided by great-apps/framework.css via CDN */
+
+/* Rank badges — circular with placement-based colors */
+.rank-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.rank-gold   { background: #b8860b; color: #fff; }
+.rank-silver { background: #71706e; color: #fff; }
+.rank-bronze { background: #8b5e3c; color: #fff; }
+
+/* Detail view rank pill colors */
+.pill-accent.rank-gold   { background: #b8860b; }
+.pill-accent.rank-silver { background: #71706e; }
+.pill-accent.rank-bronze { background: #8b5e3c; }
