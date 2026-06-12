@@ -34,6 +34,7 @@ const songs = [
   { id: "back-in-those-days-gone-by", title: "Back In Those Days Gone By", quartet: "Golden Staters", year: 1966, rank: 4, audioUrl: "audio/back-in-those-days-gone-by.mp3" },
   { id: "sing-me-a-baby-song", title: "Sing Me A Baby Song", quartet: "Sundowners", year: 1967, rank: 4, audioUrl: "audio/sing-me-a-baby-song.mp3" },
   { id: "when-you-were-a-baby-and-i-was-the-kid-next-door", title: "When You Were A Baby And I Was The Kid Next Door", quartet: "Avant Garde", year: 1968, rank: 5, audioUrl: "audio/when-you-were-a-baby-and-i-was-the-kid-next-door.mp3" },
+  { id: "somebodys-coming-to-my-house", title: "Somebody's Coming To My House", quartet: "Far Westerners", year: 1968, rank: 9, audioUrl: "audio/somebodys-coming-to-my-house.mp3" },
   { id: "mary-youre-a-little-bit-old-fashioned", title: "Mary You're A Little Bit Old Fashioned", quartet: "Golden Staters", year: 1968, rank: 3, audioUrl: "audio/mary-youre-a-little-bit-old-fashioned.mp3" },
   { id: "them-was-the-good-old-days", title: "Them Was The Good Old Days", quartet: "Sundowners", year: 1969, rank: 3, audioUrl: "audio/them-was-the-good-old-days.mp3" },
 ];
