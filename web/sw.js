@@ -1,44 +1,29 @@
-const CACHE_VERSION = "v0.3.16";
-const CACHE_NAME = "great-tunes-" + CACHE_VERSION;
-const ASSETS = [
-  "./",
-  "./index.html",
-  "./app.js",
-  "./styles.css",
-  "./manifest.json",
-  "./favicon.svg",
-  "./icons/icon-192.png",
-  "./icons/icon-512.png",
-  "./icons/apple-touch-icon.png",
-  "./apple-touch-icon.png",
-];
+// Service worker for Great Tunes — thin wrapper over the shared GreatSW core.
+//
+// CACHE_VERSION is stamped by scripts/bump-version.js; keep the line exactly so
+// the build can rewrite it. A byte-changed sw.js makes the browser activate a
+// fresh worker that re-precaches the shell and evicts the old cache.
+const CACHE_VERSION = "v0.3.17";
 
-self.addEventListener("install", (e) => {
-  e.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => cache.addAll(ASSETS))
-      .then(() => self.skipWaiting())
-  );
-});
-
-self.addEventListener("activate", (e) => {
-  e.waitUntil(
-    caches.keys()
-      .then((keys) => Promise.all(
-        keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k))
-      ))
-      .then(() => self.clients.claim())
-  );
-});
-
-self.addEventListener("fetch", (e) => {
-  e.respondWith(
-    fetch(e.request)
-      .then((response) => {
-        const clone = response.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(e.request, clone));
-        return response;
-      })
-      .catch(() => caches.match(e.request))
-  );
-});
+try {
+  importScripts("https://cdn.jsdelivr.net/gh/zacharyzimmerman/great-apps@main/sw-core.js");
+  GreatSW.init({
+    version: CACHE_VERSION,
+    cachePrefix: "great-tunes",
+    shell: [
+      "./",
+      "./index.html",
+      "./app.js",
+      "./styles.css",
+      "./manifest.json",
+      "./favicon.svg",
+      "./icons/icon-192.png",
+      "./icons/icon-512.png",
+      "./icons/apple-touch-icon.png",
+      "./apple-touch-icon.png",
+    ],
+    audio: { pathSegment: "/audio/" },
+  });
+} catch (_) {
+  // CDN unreachable at install — keep any previously-installed worker active.
+}

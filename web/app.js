@@ -202,23 +202,13 @@ function init() {
   // Keyboard shortcuts (framework helper)
   GreatApp.initKeyboard({ searchSel: "#search", detailViewSel: "#detail-view" });
 
-  // Browser back/forward
-  window.addEventListener("popstate", (e) => {
-    if (e.state && e.state.songId) {
-      selectSong(e.state.songId, { pushHistory: false });
-    } else {
-      showListView();
-    }
+  // Browser back/forward + deep link from the initial URL hash.
+  GreatApp.initRouter({
+    stateKey: "songId",
+    exists: (id) => songs.some((s) => s.id === id),
+    onSelect: (id) => selectSong(id, { pushHistory: false }),
+    onRoot: showListView,
   });
-
-  // Deep link from URL hash
-  if (window.location.hash) {
-    const id = window.location.hash.slice(1);
-    if (songs.find((s) => s.id === id)) {
-      selectSong(id, { pushHistory: false });
-      history.replaceState({ songId: id }, "", "#" + id);
-    }
-  }
 }
 
 init();
