@@ -3,7 +3,7 @@
 // CACHE_VERSION is stamped by scripts/bump-version.js; keep the line exactly so
 // the build can rewrite it. A byte-changed sw.js makes the browser activate a
 // fresh worker that re-precaches the shell and evicts the old cache.
-const CACHE_VERSION = "v0.3.17";
+const CACHE_VERSION = "v0.3.18";
 
 try {
   importScripts("https://cdn.jsdelivr.net/gh/zacharyzimmerman/great-apps@main/sw-core.js");
