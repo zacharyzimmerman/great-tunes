@@ -37,7 +37,7 @@ const songs = [
   { id: "somebodys-coming-to-town", title: "Somebody's Coming To Town", quartet: "Far Westerners", year: 1968, rank: 9, audioUrl: "audio/somebodys-coming-to-town.mp3" },
   { id: "mary-youre-a-little-bit-old-fashioned", title: "Mary You're A Little Bit Old Fashioned", quartet: "Golden Staters", year: 1968, rank: 3, audioUrl: "audio/mary-youre-a-little-bit-old-fashioned.mp3" },
   { id: "them-was-the-good-old-days", title: "Them Was The Good Old Days", quartet: "Sundowners", year: 1969, rank: 3, audioUrl: "audio/them-was-the-good-old-days.mp3" },
-  { id: "never-go-wrong-with-a-song", title: "Never Go Wrong With A Song", quartet: "Adventurers", year: 1970, rank: 20 },
+  { id: "never-go-wrong-with-a-song", title: "Never Go Wrong With A Song", quartet: "Adventurers", year: 1970, rank: 20, audioUrl: "audio/never-go-wrong-with-a-song.mp3" },
 ];
 
 let activeSongId = null;
